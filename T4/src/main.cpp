@@ -1,11 +1,19 @@
 #include "CSVParser.h"
 
-int main() {
-    std::ifstream file("test.csv");
-    parser::CSVParser<int, std::string> parser(file);
-    for (auto i = parser.begin(); i < parser.end(); ++i) {
-        std::cout << rs << std::endl;
+int main()
+{
+    try
+    {
+        std::ifstream file("test.txt");
+        parser::CSVParser<int, double, long long> csvParser(&file, 0);
+        for (auto& it : csvParser)
+        {
+            std::cout << it << std::endl;
+        }
     }
-
+    catch (const UnsupportedDataFormat& e)
+    {
+        std::cout << e.what();
+    }
     return 0;
 }
